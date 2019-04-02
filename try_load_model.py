@@ -46,7 +46,7 @@ model.compile(Adam(lr=0.01), loss='categorical_crossentropy', metrics=[categoric
 
 
 model.load_weights("MobileNet.h5")
-val_loss, val_cat_acc, val_top_2_acc, val_top_3_acc = model.evaluate_generator(test_batches, steps=len(self.df_test))
+val_loss, val_cat_acc, val_top_2_acc, val_top_3_acc = model.evaluate_generator(test_batches, steps=len(os.listdir('test_dir'))
 print('val_loss:', val_loss)
 print('val_cat_acc:', val_cat_acc)
 print('val_top_2_acc:', val_top_2_acc)
