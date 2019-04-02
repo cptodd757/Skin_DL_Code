@@ -15,6 +15,16 @@ from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from keras.layers import Input
 
+datagen = ImageDataGenerator(preprocessing_function = keras.applications.mobilenet.preprocess_input,
+                                    rotation_range = 180,
+                                    width_shift_range = 0.1,
+                                    height_shift_range = 0.1,
+                                    zoom_range = 0.1,
+                                    horizontal_flip = True,
+                                    vertical_flip = True,
+                                    #brightness_range = (0.9,1.1),
+                                    fill_mode = 'nearest')
+
 test_batches = datagen.flow_from_directory('test_dir', target_size = (64, 64), batch_size  = 1, shuffle=False)
 
 mobile = keras.applications.mobilenet.MobileNet(input_tensor = Input(shape = (64, 64, 3)))
