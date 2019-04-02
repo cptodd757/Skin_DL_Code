@@ -16,7 +16,7 @@ from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from keras.layers import Input
 
 
-mobile = keras.applications.mobilenet.MobileNet(input_tensor = Input(shape=(64, 64, 3)))
+mobile = keras.applications.mobilenet.MobileNet(input_tensor = Input(shape = (64, 64, 3)))
 
 # Fine tune the model for the last few layers
 x = mobile.layers[-6].output
@@ -34,7 +34,7 @@ model.compile(Adam(lr=0.01), loss='categorical_crossentropy', metrics=[categoric
 
 
 
-model.load_weights(self.BaseDir + "MobileNet.h5")
+model.load_weights("MobileNet.h5")
 val_loss, val_cat_acc, val_top_2_acc, val_top_3_acc = model.evaluate_generator(test_batches, steps=len(self.df_test))
 print('val_loss:', val_loss)
 print('val_cat_acc:', val_cat_acc)
