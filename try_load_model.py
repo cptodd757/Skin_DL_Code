@@ -15,6 +15,7 @@ from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from keras.layers import Input
 
+test_batches = datagen.flow_from_directory('test_dir', target_size = (64, 64), batch_size  = 1, shuffle=False)
 
 mobile = keras.applications.mobilenet.MobileNet(input_tensor = Input(shape = (64, 64, 3)))
 
