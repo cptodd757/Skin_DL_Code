@@ -323,13 +323,13 @@ class Skin_Server():
                                                     shuffle=False)
 
         # Load the pretrain model from keras.applications
-        res = keras.applications.resnet.ResNet101(input_tensor = Input(shape=(64, 64, 3)))
+        vgg = keras.applications.vgg16.VGG16(input_tensor = Input(shape=(64, 64, 3)))
 
         # Fine tune the model for the last few layers
-        x = res.layers[-6].output
+        x = vgg.layers[-6].output
         x = Dropout(0.25)(x)
         predictions = Dense(7, activation='softmax')(x)
-        model = Model(inputs = res.input, outputs = predictions)
+        model = Model(inputs = vgg.input, outputs = predictions)
         model.summary()
 
         for layer in model.layers[:-23]:
@@ -352,7 +352,7 @@ class Skin_Server():
                 6: 1.0, # vasc
                         }
 
-        filepath = self.BaseDir + "ResNet101.h5"
+        filepath = self.BaseDir + "VGG16.h5"
         checkpoint = ModelCheckpoint(filepath, monitor='val_top_3_accuracy', verbose=1,
                                      save_best_only=True, mode='max')
 
@@ -386,7 +386,7 @@ class Skin_Server():
         print('val_top_3_acc:', val_top_3_acc)
         print("The new model")
 
-        model.load_weights(self.BaseDir + "ResNet101.h5")
+        model.load_weights(self.BaseDir + "VGG16.h5")
         val_loss, val_cat_acc, val_top_2_acc, val_top_3_acc = model.evaluate_generator(test_batches, steps=len(self.df_test))
         print('val_loss:', val_loss)
         print('val_cat_acc:', val_cat_acc)
