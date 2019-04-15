@@ -14,7 +14,7 @@ from keras.metrics import categorical_accuracy, top_k_categorical_accuracy
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from keras.layers import Input
-from keras_applications.resnet import ResNet101
+import keras_applications
 
 class Skin_Server():
 
@@ -324,7 +324,7 @@ class Skin_Server():
                                                     shuffle=False)
 
         # Load the pretrain model from keras.applications
-        res = ResNet101(input_tensor = Input(shape=(64, 64, 3)))
+        res = keras_applications.resnet.ResNet101(input_tensor = Input(shape=(64, 64, 3)))
 
         # Fine tune the model for the last few layers
         x = res.layers[-6].output
