@@ -323,7 +323,7 @@ class Skin_Server():
                                                     shuffle=False)
 
         # Load the pretrain model from keras.applications
-        vgg = keras.applications.vgg16.VGG16(input_tensor = Input(shape=(64, 64, 3)))
+        vgg = keras.applications.vgg16.VGG16(input_tensor = Input(shape=(224, 224, 3)))
 
         # Fine tune the model for the last few layers
         x = vgg.layers[-6].output
