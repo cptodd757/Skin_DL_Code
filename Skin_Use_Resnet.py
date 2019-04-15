@@ -324,7 +324,8 @@ class Skin_Server():
                                                     shuffle=False)
 
         # Load the pretrain model from keras.applications
-        res = keras_applications.resnet.ResNet101(input_tensor = Input(shape=(64, 64, 3)))
+        res = keras_applications.resnet.ResNet101(input_tensor = Input(shape=(64, 64, 3)),backend=keras.backend,
+        layers = keras.layers, models = keras.models, utils = keras.utils)
 
         # Fine tune the model for the last few layers
         x = res.layers[-6].output
